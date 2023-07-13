@@ -10,6 +10,7 @@
     "lint:fix": "eslint --fix"
   },
   "dependencies": {
+    "@tristansmp/amethyst": "^0.0.26",
     "discord.js": "^14.11.0",
     "zod": "^3.21.4"
   },

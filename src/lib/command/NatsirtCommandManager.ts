@@ -11,14 +11,17 @@ export class NatsirtCommandManager {
    * @param command Command to register
    */
   public registerCommand(command: INatsirtCommand): void {
-    this.commands.set(command.data.name, command);
+    const data = "toJSON" in command.data ? command.data.toJSON() : command.data;
+    this.commands.set(data.name, command);
   }
 
   /**
    * Deploy commands in this manager to Discord
    */
   public async deployCommands(): Promise<void> {
-    const commands = [...this.commands.values()].map((command) => command.data.toJSON());
+    const commands = [...this.commands.values()].map((command) =>
+      "toJSON" in command.data ? command.data.toJSON() : command.data
+    );
 
     await this.client.guilds.cache.get(process.env.DISCORD_GUILD_ID)?.commands.set(commands);
   }

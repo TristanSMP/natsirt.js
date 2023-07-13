@@ -1,7 +1,11 @@
-import { CommandInteraction, SlashCommandBuilder } from "discord.js";
+import { CommandInteraction, RESTPostAPIChatInputApplicationCommandsJSONBody } from "discord.js";
 
 export interface INatsirtCommand {
-  data: SlashCommandBuilder;
+  data:
+    | RESTPostAPIChatInputApplicationCommandsJSONBody
+    | {
+        toJSON: () => RESTPostAPIChatInputApplicationCommandsJSONBody;
+      };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   execute: (interaction: CommandInteraction) => Promise<any> | any;
 }
